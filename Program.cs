@@ -41,7 +41,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "Bookliz API",
-        Version = "v1", // ✅ This is required
+        Version = "v1",
         Description = "API documentation for Bookliz project",
         Contact = new OpenApiContact
         {
@@ -77,11 +77,23 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
 
 var app = builder.Build();
 
 app.UseHttpsRedirection();
 
+app.UseRouting();
+app.UseCors("AllowReactApp");
 app.UseAuthentication();
 app.UseAuthorization();
 

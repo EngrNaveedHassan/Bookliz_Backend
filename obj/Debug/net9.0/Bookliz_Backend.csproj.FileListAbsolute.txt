@@ -165,3 +165,4 @@ D:\Projects\bookliz\Bookliz_Backend\obj\Debug\net9.0\refint\Bookliz_Backend.dll
 D:\Projects\bookliz\Bookliz_Backend\obj\Debug\net9.0\Bookliz_Backend.pdb
 D:\Projects\bookliz\Bookliz_Backend\obj\Debug\net9.0\Bookliz_Backend.genruntimeconfig.cache
 D:\Projects\bookliz\Bookliz_Backend\obj\Debug\net9.0\ref\Bookliz_Backend.dll
+D:\Projects\bookliz\Bookliz_Backend\obj\Debug\net9.0\Bookliz_Backend.sourcelink.json

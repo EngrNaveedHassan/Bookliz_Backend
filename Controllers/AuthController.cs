@@ -32,9 +32,10 @@ namespace Bookliz_Backend.Controllers
                 return Unauthorized("Invalid username or password.");
             if (result == "role")
                 return Unauthorized("Invalid User Role.");
-
+                
+            
             // Return the result if login is successful
-            return Ok(new { Token = result, Message = "Login successful." });
+            return Ok(new { Token = result, Message = "Login successful."});
         }
 
         [HttpPost("logout")]
