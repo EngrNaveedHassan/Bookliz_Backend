@@ -21,22 +21,23 @@ namespace Bookliz_Backend.Controllers
                 return BadRequest("Invalid login data.");
 
             var result = await _authService.LoginAsync(userLogin);
-            // Check if the result is valid
-            if (result == null)
-                return Unauthorized("Invalid username or password.");
-            if (result == "username")
-                return Unauthorized("Username not found.");
-            if (result == "password")
-                return Unauthorized("Incorrect password.");
-            if (result == string.Empty)
-                return Unauthorized("Invalid username or password.");
-            if (result == "role")
-                return Unauthorized("Invalid User Role.");
-                
-            
-            // Return the result if login is successful
-            return Ok(new { Token = result, Message = "Login successful."});
+
+            if (result is string error)
+            {
+                return error switch
+                {
+                    "user" => BadRequest("Login model is missing."),
+                    "role" => Unauthorized("Invalid User Role."),
+                    "username" => Unauthorized("Username not found."),
+                    "password" => Unauthorized("Incorrect password."),
+                    _ => Unauthorized("Invalid credentials.")
+                };
+            }
+
+            var loginResult = result as LoginInResponce;
+            return Ok(new { Token = loginResult!.Token, User = loginResult.User, Message = "Login successful." });
         }
+
 
         [HttpPost("logout")]
         public async Task<bool> Logout()

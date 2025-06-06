@@ -19,7 +19,7 @@ namespace Bookliz_Backend.Services
             _configuration = configuration;
         }
 
-        public async Task<string> LoginAsync(UserLoginModel userLogin)
+        public async Task<Object> LoginAsync(UserLoginModel userLogin)
         {
             if (userLogin == null)
                 return "user";
@@ -40,7 +40,11 @@ namespace Bookliz_Backend.Services
                 == PasswordVerificationResult.Failed)
                 return "password";
 
-            return GenerateJwtToken(user);
+            return new LoginInResponce
+            {
+                Token = GenerateJwtToken(user),
+                User = user
+            };
         }
 
         public async Task<bool> LogoutAsync()

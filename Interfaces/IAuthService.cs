@@ -6,7 +6,7 @@ namespace Bookliz_Backend.Services
     public interface IAuthService
     {
         Task<User> RegisterAsync(UserRegistrationModel userdto);
-        Task<string> LoginAsync(UserLoginModel userLogin);
+        Task<Object> LoginAsync(UserLoginModel userLogin);
         Task<bool> LogoutAsync();
     }
 }
