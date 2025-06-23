@@ -34,7 +34,9 @@ namespace Bookliz_Backend.Services
 
         public IEnumerable<Student> GetAllStudents()
         {
-            return _context.Students.ToList();
+            var result = _context.Students.ToList();
+            result.Where(s => s.marks > 50);
+            return result;
         }
 
         public async Task<Student> GetStudentByRegNumberAsync(string RegNumber)

@@ -1,5 +1,6 @@
 using Bookliz_Backend.Models;
 using Bookliz_Backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bookliz_Backend.Controllers
@@ -38,15 +39,8 @@ namespace Bookliz_Backend.Controllers
             return Ok(new { Token = loginResult!.Token, User = loginResult.User, Message = "Login successful." });
         }
 
-
-        [HttpPost("logout")]
-        public async Task<bool> Logout()
-        {
-            var result = await _authService.LogoutAsync();
-            return result;
-        }
-
         [HttpPost("register")]
+        [Authorize(Roles ="Librarian")]
         public async Task<IActionResult> Register([FromBody] UserRegistrationModel userdto)
         {
             if (userdto == null)
